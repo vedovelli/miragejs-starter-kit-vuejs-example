@@ -1,8 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
+import { makeServer } from "./miragejs/server";
 
-Vue.config.productionTip = false
+if (process.env.NODE_ENV === "development") {
+  makeServer();
+}
+
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+}).$mount("#app");
