@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <h2>Users</h2>
-    <p v-for="user in users" :key="`user-${user.id}`">{{ user.name }}</p>
+    <p
+      style="cursor: pointer"
+      @click="getMessages(user.id)"
+      v-for="user in users"
+      :key="`user-${user.id}`"
+    >{{ user.name }}</p>
     <hr />
     <h2>Products</h2>
     <p v-for="product in products" :key="`product-${product.id}`">{{ product.name }}</p>
@@ -33,6 +38,16 @@ export default {
       .then(({ products }) => {
         this.products = products;
       });
+  },
+  methods: {
+    getMessages(userId) {
+      fetch(`api/messages?userId=${userId}`)
+        .then(res => res.json())
+        .then(({ messages }) => {
+          // eslint-disable-next-line
+          console.log(messages);
+        });
+    }
   }
 };
 </script>
